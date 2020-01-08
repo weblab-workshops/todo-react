@@ -1,0 +1,8 @@
+.ListItem-checked {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.ListItem-content {
+  margin: 0 5px;
+}
