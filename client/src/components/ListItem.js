@@ -9,7 +9,7 @@ class ListItem extends Component {
     };
   }
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const value = event.target.checked;
     this.setState({
       isDone: value
@@ -21,7 +21,7 @@ class ListItem extends Component {
       <li className={this.state.isDone ? "ListItem-checked" : ""}>
         <input
           type="checkbox"
-          checked={this.state.isGoing}
+          checked={this.state.isDone}
           onChange={this.handleInputChange}
         />
         <span className="ListItem-content">{this.props.content}</span>

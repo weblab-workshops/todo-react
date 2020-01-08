@@ -20,7 +20,7 @@ class TodoList extends Component {
     return this.idCounter;
   };
 
-  handleInputChange = () => {
+  handleInputChange = (event) => {
     const value = event.target.value;
     this.setState({
       inputText: value
