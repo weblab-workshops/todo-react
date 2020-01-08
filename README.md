@@ -47,7 +47,7 @@ Once you have the repo cloned, the next step will be run the hotloader, so that 
 [Step 1 solution](solutions/step1.md)
 
 ## Step 2: Hardcode a to-do list
-Now we can finally start writing some React code (which, if you remember, just boils down to JavaScript!). The first step will be to write a React component that represents a to-do item. You can hardcode the to-do's content for now. The hard part of this step (and the thing that React should make easier!) is that we want you to write **one** React component, but then use it multiple times, with different content each time!
+Now we can finally start writing some React code (which, if you remember, just boils down to JavaScript!). The first step will be to write a React component that represents a to-do item. You can hardcode the to-do's content for now. The hard part of this step (and the thing that React should make easier!) is that we want you to write **one** React component, but then use it multiple times, with different content each time! Recall that, every time we make a React component, we need to `export` it from the file we make it in, and `import` it in the file we'd like to use it in. See Workshop 1 or 2 for the specific syntax here.
 
 ![hw1](img/hw1.gif)
 
