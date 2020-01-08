@@ -6,7 +6,7 @@ class App extends Component {
   }
 
   render() {
-    return <div>Make me into a todo list!</div>;
+    return (<div>Make me into a todo list!</div>);
   }
 }
 
