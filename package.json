@@ -1,0 +1,46 @@
+{
+  "name": "todo-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "hotloader": "webpack-dev-server --config ./webpack.config.js --mode development --port 5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mit6148-workshops/todo-react.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mit6148-workshops/todo-react/issues"
+  },
+  "homepage": "https://github.com/mit6148-workshops/todo-react#readme",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "core-js": "^3.3.6",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "url-loader": "^1.1.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.6.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
