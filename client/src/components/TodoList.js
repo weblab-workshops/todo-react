@@ -5,20 +5,11 @@ import "./TodoList.css";
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.idCounter = 0;
     this.state = {
       todos: [],
       inputText: ""
     };
   }
-
-  // We need every todo to have a unique id,
-  // since that's what we use to delete,
-  // so we keep a running counter to make ids
-  getId = () => {
-    this.idCounter += 1;
-    return this.idCounter;
-  };
 
   handleInputChange = (event) => {
     const value = event.target.value;
@@ -29,17 +20,20 @@ class TodoList extends Component {
 
   submitTodo = () => {
     const { todos, inputText } = this.state;
-    const newTodos = todos.concat([{ text: inputText, id: this.getId() }]);
+    const newTodos = todos.concat([inputText]);
     this.setState({
       todos: newTodos,
       inputText: ""
     });
   };
 
-  deleteTodo = (idToRemove) => {
+  deleteTodo = (index) => {
     const { todos } = this.state;
-    const filteredTodos = todos.filter(el => el.id !== idToRemove);
-    this.setState({ todos: filteredTodos });
+    // One way to copy an array:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+    const newTodos = todos.slice();
+    newTodos.splice(index, 1)
+    this.setState({ todos: newTodos });
   };
 
   render() {
@@ -47,11 +41,11 @@ class TodoList extends Component {
       <div className="TodoList-container">
         <h1>{this.props.title}</h1>
         <ul>
-          {this.state.todos.map(todo => (
+          {this.state.todos.map((todo, index) => (
             <ListItem
-              key={`listItem-${todo.id}`}
-              content={todo.text}
-              deleteTodo={() => this.deleteTodo(todo.id)}
+              key={`listItem-${index}`}
+              content={todo}
+              deleteTodo={() => this.deleteTodo(index)}
             />
           ))}
         </ul>
