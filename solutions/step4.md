@@ -1,22 +1,16 @@
 `TodoList.js`:
 ```html
+import React, { Component } from "react";
+import ListItem from "./ListItem.js";
+
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.idCounter = 0;
     this.state = {
       todos: [],
       inputText: ""
     };
   }
-
-  // We need every todo to have a unique id,
-  // since that's what we use to delete,
-  // so we keep a running counter to make ids
-  getId = () => {
-    this.idCounter += 1;
-    return this.idCounter;
-  };
 
   handleInputChange = (event) => {
     const value = event.target.value;
@@ -27,28 +21,31 @@ class TodoList extends Component {
 
   submitTodo = () => {
     const { todos, inputText } = this.state;
-    const newTodos = todos.concat([{ text: inputText, id: this.getId() }]);
+    const newTodos = todos.concat([inputText]);
     this.setState({
       todos: newTodos,
       inputText: ""
     });
   };
 
-  deleteTodo = (idToRemove) => {
+  deleteTodo = (index) => {
     const { todos } = this.state;
-    const filteredTodos = todos.filter(el => el.id !== idToRemove);
-    this.setState({ todos: filteredTodos });
+    // One way to copy an array:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+    const newTodos = todos.slice();
+    newTodos.splice(index, 1)
+    this.setState({ todos: newTodos });
   };
 
   render() {
     return (
       <div>
         <ul>
-          {this.state.todos.map(todo => (
+          {this.state.todos.map((todo, index) => (
             <ListItem
-              key={`listItem-${todo.id}`}
-              content={todo.text}
-              deleteTodo={() => this.deleteTodo(todo.id)}
+              key={`listItem-${index}`}
+              content={todo}
+              deleteTodo={() => this.deleteTodo(index)}
             />
           ))}
         </ul>
@@ -62,10 +59,14 @@ class TodoList extends Component {
     );
   }
 }
+
+export default TodoList;
 ```
 
 `ListItem.js`:
 ```html
+import React, { Component } from "react";
+
 class ListItem extends Component {
   constructor(props) {
     super(props);
@@ -95,7 +96,9 @@ class ListItem extends Component {
     );
   }
 }
+
+export default ListItem;
 ```
-To keep IDs, I decided to make a helper function that will increment a counter and give its new value to me. That way, I know it's unique every time. I use that in `submitTodo`. Then, `deleteTodo` takes an ID as input, and filters the to-do list to get rid of that to-do. We don't pass it directly to each `ListItem`, we actually define an anonymous function everytime, whose only job is to call `deleteTodo` with a specific ID!
+We make a `deleteTodo` function that takes an index as input, and makes a new to-do array without the element at that index. Note, we don't pass it directly to each `ListItem`, we actually define an anonymous function everytime, whose only job is to call `deleteTodo` with a specific index!
 
 Then in `ListItem`, we simply call that `deleteTodo` prop passed when we click on the X.

@@ -51,7 +51,7 @@ Now we can finally start writing some React code (which, if you remember, just b
 
 ![hw1](img/hw1.gif)
 
-*Some styling is used to achieve the above^
+*Some styling is used to achieve the above, but we won't have it in the solutions^
 
 Hmm, how can we accomplish that? Try to match the picture. At this step, remember that the internet is your friend, and the best resource out there. For something like "how do I even make a checkbox?", google it!
 
@@ -69,11 +69,11 @@ Hmm, how can we accomplish that? Try to match the picture. At this step, remembe
 Like we said, we want a component to represent a to-do item. Let's call it something like `ListItem`. We want to be able to do something like
 ```html
 <ul>
-  <ListItem />
-  <ListItem />
+  <ListItem ???/>
+  <ListItem ???/>
 </ul>
 ```
-but have every list item render different text. We accomplish this with `props`! If we make a React component's `render` function depend on the `props` of that component, we can make two `ListItem`s look different, but have exactly the same code.
+but have every list item render different text. We accomplish this with `props`! If we make a React component's `render` function depend on the `props` of that component, we can make two `ListItem`'s look different, but have exactly the same code.
 
 <br/>
 <br/>
@@ -95,9 +95,9 @@ In the last step, we added a checkbox input. Inputs are really cool HTML element
 
 But what if we wanted to know whether the checkbox was checked or not at some point? There's probably some obscure method we could use to do this, but React has a suggested approach, in what is known as **Controlled Components**.
 
-First, read more about them [here](https://reactjs.org/docs/forms.html). The general idea is that we actually take over the state management of the checkbox (or any input, for that matter). We do this because it gives us an easy way to know the state of an input at any time, since it'll be in our state.
+First, read more about them [here](https://reactjs.org/docs/forms.html). The general idea is that we actually take over the state management of the checkbox (or any input, for that matter). We do this because it gives us an easy way to know the state of an input at any time, since it'll be in our `this.state`.
 
-For this step, try to make the checkbox input you used a Controlled Component. In other words, declare some state for `ListItem` that determines whether the checkbox is checked or not, and changed when the checkbox is pressed.
+For this step, try to make the checkbox input you used a Controlled Component. In other words, declare some state for `ListItem` that determines whether the checkbox is checked or not, and that changes when the checkbox is pressed.
 
 <br/>
 <br/>
@@ -117,7 +117,7 @@ The first time we build a React component, it's always helpful to pass in some h
 
 ![hw2](img/hw2.gif)
 
-As a starting point, think about how you might represent a to-do item in `state`, our other React friend. Remember, google should be your first go-to when getting stuck.
+As a starting point, think about how you might represent a to-do item in `state`. Remember, google should be your first go-to when getting stuck.
 
 <br/>
 <br/>
