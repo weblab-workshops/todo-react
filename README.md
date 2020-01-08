@@ -4,9 +4,9 @@ Get more familiar with react by making a todo list!
 Here is the finished product we are aiming for:  
 ![HW4](img/hw4.gif)
 
-This README contains both step-by-step instructions and hints. At first, we recommend you scroll only far enough to see the instructions, and try to do what we ask on your own. Even for things like cloning the repository! Try to see if you remember the git commands before directly copying the commands.
+This README contains both step-by-step instructions and hints. Solutions will be in separate files, also linked in this document. At first, we recommend you scroll only far enough to see the instructions, and try to do what we ask on your own. Even for things like cloning the repository! Try to see if you remember the git commands before directly copying the commands.
 
-Still, if you get stuck, feel free to refer back to this README.
+Still, if you get stuck, feel free to refer back to this README, scrolling a bit more to see the hints. After trying your best, go ahead and compare to the linked solution.
 
 We don't have branches for every step, so just try your best to follow along. There is a branch with staff solutions, so when you get through this README, we'll have you checkout to there and see what we did.
 
@@ -26,16 +26,7 @@ Try this on your own! See below for the commands to run, if you get stuck.
 <br/>
 
 #### Solution
-On the GitHub page, copy the link to the repo by pressing this button, making sure it is set to "Clone with HTTPS"
-
-![clone](img/clone.gif)
-
-In the terminal, use the `cd` command to navigate to the folder you want to have the repo. Then run the following command:
-```
-git clone https://github.com/weblab-workshops/todo-react.git
-```
-
-Congrats! You successfully *cloned the repo*.
+[Step 0 solution](solutions/step0.md)
 
 ## Step 1: Run the hotloader
 Once you have the repo cloned, the next step will be run the hotloader, so that we can make changes to code and see them in our browser. The end goal of this step is to see the following in our browser. Try to get here on your own first.
@@ -53,23 +44,14 @@ Once you have the repo cloned, the next step will be run the hotloader, so that 
 <br/>
 
 #### Solution
-Before we can run the hotloader, we need to make sure that we actually navigate inside the folder first! To do so, we run
-```
-cd todo-react/
-```
-After that, we actually need to install some packages (like React!), to make this project run
-```
-npm install
-```
-Finally, we can then run the hotloader, which if you recall from past workshops, we do with the following
-```
-npm run hotloader
-```
+[Step 1 solution](solutions/step1.md)
 
 ## Step 2: Hardcode a to-do list
 Now we can finally start writing some React code (which, if you remember, just boils down to JavaScript!). The first step will be to write a React component that represents a to-do item. You can hardcode the to-do's content for now. The hard part of this step (and the thing that React should make easier!) is that we want you to write **one** React component, but then use it multiple times, with different content each time!
 
 ![hw1](img/hw1.gif)
+
+*Some styling is used to achieve the above^
 
 Hmm, how can we accomplish that? Try to match the picture. At this step, remember that the internet is your friend, and the best resource out there. For something like "how do I even make a checkbox?", google it!
 
@@ -84,7 +66,7 @@ Hmm, how can we accomplish that? Try to match the picture. At this step, remembe
 <br/>
 
 #### Hint
-Like we said, we want a component to represent a to-do item. Let's call it something like `TodoItem`. We want to be able to do something like
+Like we said, we want a component to represent a to-do item. Let's call it something like `ListItem`. We want to be able to do something like
 ```html
 <ul>
   <ListItem />
@@ -104,48 +86,31 @@ but have every list item render different text. We accomplish this with `props`!
 <br/>
 
 #### Solution
-With that knowledge of `props`, the general idea is this:  
-In a parent component, such as `TodoList`, we want the following
-```html
-<ul>
-  <ListItem content="A"/>
-  <ListItem content="B"/>
-</ul>
-```
-And `ListItem` should look something like the following
-```html
-class ListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDone: false
-    };
-  }
+[Step 2 solution](solutions/step2.md)
 
-  handleInputChange = event => {
-    const value = event.target.checked;
-    this.setState({
-      isDone: value
-    });
-  };
+## Step 2.5: Track the state of the checkbox
+This step is not strictly necessary, but teaches a lot about interacting with elements when using React, and will help with Step 3.
 
-  render() {
-    return (
-      <li>
-        <input
-          type="checkbox"
-          checked={this.state.isGoing}
-          onChange={this.handleInputChange}
-        />
-        <span>{this.props.content}</span>
-      </li>
-    );
-  }
-}
-```
-The crucial part here is that our `render` has a `<span>` that just directly renders the `content` prop we passed in!
+In the last step, we added a checkbox input. Inputs are really cool HTML elements, but they're kind of special in that they have some inherent "state" to them (a more abstract notion of state, not referring to React's specific version of `state`). In the case of a checkbox, it can either be "checked" or not. We don't have to worry about keeping track of this, because the HTML element does it on its own.
 
-The checkbox input is also pretty tricky, but hopefully you came across [this article](https://reactjs.org/docs/forms.html) in your search, and maybe learned a little about **Controlled Components**?
+But what if we wanted to know whether the checkbox was checked or not at some point? There's probably some obscure method we could use to do this, but React has a suggested approach, in what is known as **Controlled Components**.
+
+First, read more about them [here](https://reactjs.org/docs/forms.html). The general idea is that we actually take over the state management of the checkbox (or any input, for that matter). We do this because it gives us an easy way to know the state of an input at any time, since it'll be in our state.
+
+For this step, try to make the checkbox input you used a Controlled Component. In other words, declare some state for `ListItem` that determines whether the checkbox is checked or not, and changed when the checkbox is pressed.
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+#### Solution
+[Step 2.5 solution](solutions/step25.md)
 
 ## Step 3: Make to-dos based on user input
 The first time we build a React component, it's always helpful to pass in some hardcoded `props`, so that we know the component works as expected. The natural next step is to get rid of the hardcoding, and use dynamic data. Let's try to do that with our to-do list, and make to-do items based on user input. 
@@ -192,58 +157,7 @@ Next, make a button. When you hit it, you should get a new to-do that shows up.
 <br/>
 
 #### Solution
-Our `ListItem` is pretty set from step 2, so we focus on `TodoList`.
-```html
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: [],
-      inputText: ""
-    };
-  }
-
-  handleInputChange = () => {
-    const value = event.target.value;
-    this.setState({
-      inputText: value
-    });
-  };
-
-  submitTodo = () => {
-    const { todos, inputText } = this.state;
-    const newTodos = todos.concat([ inputText ]);
-    this.setState({
-      todos: newTodos,
-      inputText: ""
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.state.todos.map((todo, index) => (
-            <ListItem
-              key={`listItem-${index}`}
-              content={todo}
-            />
-          ))}
-        </ul>
-        <input
-          type="text"
-          value={this.state.inputText}
-          onChange={this.handleInputChange}
-        />
-        <button onClick={this.submitTodo}>Add to-do!</button>
-      </div>
-    );
-  }
-}
-```
-We have `handleInputChange` to deal with user input, and we have `submitTodo` to deal with hitting the button.
-
-The other tricky thing is the `map` in the `render` function. We covered this in Workshop, and you'll use it a lot in React, so make sure you're super clear on it!
+[Step 3 solution](solutions/step3.md)
 
 ## Step 4: Delete to-dos?
 If you got this far, nice work! This is probably all you really need to know to be considered "caught up". The next two steps are really just challenge/fun.
@@ -263,7 +177,7 @@ First, can you add the ability to delete to-dos?
 <br/>
 
 #### Hint
-To be able to delete, we need to be able to identify which to-do item the user clicked on. Consider changing your `submitTodo` function first. When submitting a to-do, instead of just storing the text, it might be helpful to store a JavaScript object that contains the text and a unique ID number. You can choose how to generate that ID number. 
+To be able to delete, we need to be able to identify which to-do item the user clicked on. We store every to-do in an array, and every element of an array has an index, so maybe we can use that?
 
 <br/>
 <br/>
@@ -276,9 +190,9 @@ To be able to delete, we need to be able to identify which to-do item the user c
 <br/>
 
 #### Hint
-What do we do with that ID number? Well, we probably want some function that handles deleting. It can take as input that ID number, and then go through the todos we have, and get rid of the one with that ID number. Where should we define this function? Where should we call this function? These are good questions to be asking at this point.
+What do we do with the index? Well, we probably want some function that handles deleting. It can take as input that index, and then make a new array of to-dos where the element at that index is removed. Where should we define this function? Where should we call this function? These are good questions to be asking at this point.
 
-I suggest defining it in `TodoList`, since that is where we keep our to-dos, so going through them should easiest there. It should be called when we click on that X button, which looks like it lives in `ListItem`. Hmmm, how can we get a function from a parent to its child?
+I suggest defining it in `TodoList`, since that is where we keep our to-dos, so going through them should be easiest there. It should be called when we click on that X button, which looks like it lives in `ListItem`. Hmmm, how can we get a function from a parent to its child?
 
 <br/>
 <br/>
@@ -291,102 +205,7 @@ I suggest defining it in `TodoList`, since that is where we keep our to-dos, so 
 <br/>
 
 #### Solution
-`TodoList.js`:
-```html
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.idCounter = 0;
-    this.state = {
-      todos: [],
-      inputText: ""
-    };
-  }
-
-  // We need every todo to have a unique id,
-  // since that's what we use to delete,
-  // so we keep a running counter to make ids
-  getId = () => {
-    this.idCounter += 1;
-    return this.idCounter;
-  };
-
-  handleInputChange...
-
-  submitTodo = () => {
-    const { todos, inputText } = this.state;
-    const newTodos = todos.concat([{ text: inputText, id: this.getId() }]);
-    this.setState({
-      todos: newTodos,
-      inputText: ""
-    });
-  };
-
-  deleteTodo = (idToRemove) => {
-    const { todos } = this.state;
-    const filteredTodos = todos.filter(el => el.id !== idToRemove);
-    this.setState({ todos: filteredTodos });
-  };
-
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.state.todos.map(todo => (
-            <ListItem
-              key={`listItem-${todo.id}`}
-              content={todo.text}
-              deleteTodo={() => this.deleteTodo(todo.id)}
-            />
-          ))}
-        </ul>
-        <input
-          type="text"
-          value={this.state.inputText}
-          onChange={this.handleInputChange}
-        />
-        <button onClick={this.submitTodo}>Add to-do!</button>
-      </div>
-    );
-  }
-}
-```
-
-`ListItem.js`:
-```html
-class ListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDone: false
-    };
-  }
-
-  handleInputChange = event => {
-    const value = event.target.checked;
-    this.setState({
-      isDone: value
-    });
-  };
-
-  render() {
-    return (
-      <li>
-        <input
-          type="checkbox"
-          checked={this.state.isGoing}
-          onChange={this.handleInputChange}
-        />
-        <span>{this.props.content}</span>
-        <button onClick={this.props.deleteTodo}>X</button>
-      </li>
-    );
-  }
-}
-```
-To keep IDs, I decided to make a helper function that will increment a counter and give its new value to me. That way, I know it's unique every time. I use that in `submitTodo`. Then, `deleteTodo` takes an ID as input, and filters the to-do list to get rid of that to-do. We don't pass it directly to each `ListItem`, we actually define an anonymous function everytime, whose only job is to call `deleteTodo` with a specific ID!
-
-Then in `ListItem`, we simply call that `deleteTodo` prop passed when we click on the X.
+[Step 4 solution](solutions/step4.md)
 
 ## Step 5: Get stylish!
 No real instructions here, just make it look fun! You don't need to make it look like mine, you can do your own thing.
