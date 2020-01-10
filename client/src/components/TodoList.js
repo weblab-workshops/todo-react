@@ -9,9 +9,11 @@ class TodoList extends Component {
       todos: [],
       inputText: ""
     };
+
+    this.keyCounter = 0;
   }
 
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     const value = event.target.value;
     this.setState({
       inputText: value
@@ -20,19 +22,18 @@ class TodoList extends Component {
 
   submitTodo = () => {
     const { todos, inputText } = this.state;
-    const newTodos = todos.concat([inputText]);
+    const newTodos = todos.concat([{ todo: inputText, key: this.keyCounter }]);
+    this.keyCounter++;
+
     this.setState({
       todos: newTodos,
       inputText: ""
     });
   };
 
-  deleteTodo = (index) => {
+  deleteTodo = key => {
     const { todos } = this.state;
-    // One way to copy an array:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-    const newTodos = todos.slice();
-    newTodos.splice(index, 1)
+    const newTodos = todos.filter(item => item.key !== key);
     this.setState({ todos: newTodos });
   };
 
@@ -41,11 +42,11 @@ class TodoList extends Component {
       <div className="TodoList-container">
         <h1>{this.props.title}</h1>
         <ul>
-          {this.state.todos.map((todo, index) => (
+          {this.state.todos.map(item => (
             <ListItem
-              key={`listItem-${index}`}
-              content={todo}
-              deleteTodo={() => this.deleteTodo(index)}
+              key={`listItem-${item.key}`}
+              content={item.todo}
+              deleteTodo={() => this.deleteTodo(item.key)}
             />
           ))}
         </ul>
