@@ -177,7 +177,7 @@ First, can you add the ability to delete to-dos?
 <br/>
 
 #### Hint
-To be able to delete, we need to be able to identify which to-do item the user clicked on. We store every to-do in an array, and every element of an array has an index, so maybe we can use that?
+To be able to delete, we need to be able to identify which to-do item the user clicked on. Consider changing your `submitTodo` function first. When submitting a to-do, instead of just storing the text, it might be helpful to store a JavaScript object that contains the text and a unique ID number. You can choose how to generate that ID number. 
 
 <br/>
 <br/>
@@ -190,9 +190,9 @@ To be able to delete, we need to be able to identify which to-do item the user c
 <br/>
 
 #### Hint
-What do we do with the index? Well, we probably want some function that handles deleting. It can take as input that index, and then make a new array of to-dos where the element at that index is removed. Where should we define this function? Where should we call this function? These are good questions to be asking at this point.
-
-I suggest defining it in `TodoList`, since that is where we keep our to-dos, so going through them should be easiest there. It should be called when we click on that X button, which looks like it lives in `ListItem`. Hmmm, how can we get a function from a parent to its child?
+What do we do with that ID number? Well, we probably want some function that handles deleting. It can take as input that ID number, and then go through the todos we have, and get rid of the one with that ID number. Where should we define this function? Where should we call this function? These are good questions to be asking at this point.	 
+  
+I suggest defining it in `TodoList`, since that is where we keep our to-dos, so going through them should easiest there. It should be called when we click on that X button, which looks like it lives in `ListItem`. Hmmm, how can we get a function from a parent to its child?
 
 <br/>
 <br/>

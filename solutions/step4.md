@@ -99,6 +99,6 @@ class ListItem extends Component {
 
 export default ListItem;
 ```
-We make a `deleteTodo` function that takes an index as input, and makes a new to-do array without the element at that index. Note, we don't pass it directly to each `ListItem`, we actually define an anonymous function everytime, whose only job is to call `deleteTodo` with a specific index!
+To keep IDs, we use a class instance field called `keyCounter`. Remember that React Components are just JavaScript classes, so they can have instance variables other than state! We make `keyCounter` a normal instance variable since changing it shouldn't cause a rerender. We know it's unique everytime since we increment it whenever making a new todo. I use that in `submitTodo`. Then, `deleteTodo` takes the key as input, and filters the to-do list to get rid of that to-do. Note, we don't pass it directly to each `ListItem`, we actually define an anonymous function everytime, whose only job is to call `deleteTodo` with a specific ID!
 
 Then in `ListItem`, we simply call that `deleteTodo` prop passed when we click on the X.
