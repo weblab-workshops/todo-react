@@ -15,6 +15,8 @@ Get this repository (repo, for short) from GitHub onto your own computer. Rememb
 
 Try this on your own! See below for the commands to run, if you get stuck.
 
+Note: DO NOT clone this repository inside of catbook-react. Make sure you're in some other directory like your home directory (~) or Desktop or Documents.
+
 <br/>
 <br/>
 <br/>
