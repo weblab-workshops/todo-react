@@ -10,15 +10,16 @@ const ListItem = (props) => {
   };
 
   return (
-    <li>
+    <li className={isDone ? "ListItem-checked" : ""}>
       <input
         type="checkbox"
         checked={isDone}
         onChange={handleInputChange}
       />
-      <span>{props.content}</span>
+      <span className="ListItem-content">{props.content}</span>
+      <button onClick={props.deleteTodo}>X</button>
     </li>
   );
-}
+};
 
 export default ListItem;

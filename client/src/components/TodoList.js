@@ -5,6 +5,7 @@ import "./TodoList.css";
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [keyCounter, setKeyCounter] = useState(0);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -12,37 +13,33 @@ const TodoList = (props) => {
   };
 
   const submitTodo = () => {
-    setTodos([...todos, inputText]);
+    const newTodos = todos.concat([{ todo: inputText, key: keyCounter }]);
+    setKeyCounter(keyCounter + 1);
+    setTodos(newTodos);
     setInputText("");
   };
 
-  const deleteTodo = (index) => {
-    // One way to copy an array:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-    const newTodos = todos.slice();
-    newTodos.splice(index, 1)
+  const deleteTodo = (key) => {
+    const newTodos = todos.filter((item) => item.key !== key);
     setTodos(newTodos);
   };
 
   return (
-    <div>
+    <div className="TodoList-container">
+      <h1>{props.title}</h1>
       <ul>
-        {todos.map((todo, index) => (
+        {todos.map((item) => (
           <ListItem
-            key={`listItem-${index}`}
-            content={todo}
-            deleteTodo={() => deleteTodo(index)}
+            key={`listItem-${item.key}`}
+            content={item.todo}
+            deleteTodo={() => deleteTodo(item.key)}
           />
         ))}
       </ul>
-      <input
-        type="text"
-        value={inputText}
-        onChange={handleInputChange}
-      />
+      <input type="text" value={inputText} onChange={handleInputChange} />
       <button onClick={submitTodo}>Add to-do!</button>
     </div>
   );
-}
+};
 
 export default TodoList;
