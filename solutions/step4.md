@@ -65,11 +65,11 @@ const ListItem = (props) => {
     <li>
       <input
         type="checkbox"
-        checked={this.state.isGoing}
-        onChange={this.handleInputChange}
+        checked={state.isDone}
+        onChange={handleInputChange}
       />
       <span>{props.content}</span>
-      <button onClick={this.props.deleteTodo}>X</button>
+      <button onClick={props.deleteTodo}>X</button>
     </li>
   );
 }
