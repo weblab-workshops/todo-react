@@ -14,8 +14,8 @@ const ListItem = (props) => {
     <li>
       <input
         type="checkbox"
-        checked={this.state.isDone}
-        onChange={this.handleInputChange}
+        checked={isDone}
+        onChange={handleInputChange}
       />
       <span>{props.content}</span>
     </li>
