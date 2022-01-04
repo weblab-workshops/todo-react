@@ -1,5 +1,6 @@
+We change `ListItem` to look like this
+```html
 import React, { useState } from "react";
-import "./ListItem.css";
 
 const ListItem = (props) => {
   const [isDone, setIsDone] = useState(false);
@@ -22,3 +23,6 @@ const ListItem = (props) => {
 }
 
 export default ListItem;
+```
+
+Now, we control the state of the checkbox by having it explicitly in our `ListItem`'s `isDone` state! And to change it, we have the `handleInputChange` function.

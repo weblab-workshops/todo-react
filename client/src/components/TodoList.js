@@ -1,64 +1,48 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ListItem from "./ListItem.js";
 import "./TodoList.css";
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: [],
-      inputText: ""
-    };
+const TodoList = (props) => {
+  const [todos, setTodos] = useState([]);
+  const [inputText, setInputText] = useState("");
 
-    this.keyCounter = 0;
-  }
-
-  handleInputChange = event => {
+  const handleInputChange = (event) => {
     const value = event.target.value;
-    this.setState({
-      inputText: value
-    });
+    setInputText(value);
   };
 
-  submitTodo = () => {
-    const { todos, inputText } = this.state;
-    const newTodos = todos.concat([{ todo: inputText, key: this.keyCounter }]);
-    this.keyCounter++;
-
-    this.setState({
-      todos: newTodos,
-      inputText: ""
-    });
+  const submitTodo = () => {
+    setTodos([...todos, inputText]);
+    setInputText("");
   };
 
-  deleteTodo = key => {
-    const { todos } = this.state;
-    const newTodos = todos.filter(item => item.key !== key);
-    this.setState({ todos: newTodos });
+  const deleteTodo = (index) => {
+    // One way to copy an array:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+    const newTodos = todos.slice();
+    newTodos.splice(index, 1)
+    setTodos(newTodos);
   };
 
-  render() {
-    return (
-      <div className="TodoList-container">
-        <h1>{this.props.title}</h1>
-        <ul>
-          {this.state.todos.map(item => (
-            <ListItem
-              key={`listItem-${item.key}`}
-              content={item.todo}
-              deleteTodo={() => this.deleteTodo(item.key)}
-            />
-          ))}
-        </ul>
-        <input
-          type="text"
-          value={this.state.inputText}
-          onChange={this.handleInputChange}
-        />
-        <button onClick={this.submitTodo}>Add to-do!</button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ul>
+        {todos.map((todo, index) => (
+          <ListItem
+            key={`listItem-${index}`}
+            content={todo}
+            deleteTodo={() => deleteTodo(index)}
+          />
+        ))}
+      </ul>
+      <input
+        type="text"
+        value={inputText}
+        onChange={handleInputChange}
+      />
+      <button onClick={submitTodo}>Add to-do!</button>
+    </div>
+  );
 }
 
 export default TodoList;
