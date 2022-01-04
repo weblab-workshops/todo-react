@@ -1,13 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (<div>Make me into a todo list!</div>);
-  }
+const App = (props) => {
+  return <div>Make me into a todo list!</div>
 }
 
 export default App;

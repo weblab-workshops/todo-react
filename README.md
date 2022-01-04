@@ -75,7 +75,7 @@ Like we said, we want a component to represent a to-do item. Let's call it somet
   <ListItem ???/>
 </ul>
 ```
-but have every list item render different text. We accomplish this with `props`! If we make a React component's `render` function depend on the `props` of that component, we can make two `ListItem`'s look different, but have exactly the same code.
+but have every list item render different text. We accomplish this with `props`! If we make a React component's `return` function depend on the `props` of that component, we can make two `ListItem`'s look different, but have exactly the same code.
 
 <br/>
 <br/>
@@ -97,7 +97,7 @@ In the last step, we added a checkbox input. Inputs are really cool HTML element
 
 But what if we wanted to know whether the checkbox was checked or not at some point? There's probably some obscure method we could use to do this, but React has a suggested approach, in what is known as **Controlled Components**.
 
-First, read more about them [here](https://reactjs.org/docs/forms.html). The general idea is that we actually take over the state management of the checkbox (or any input, for that matter). We do this because it gives us an easy way to know the state of an input at any time, since it'll be in our `this.state`.
+First, read more about them [here](https://reactjs.org/docs/forms.html). The general idea is that we actually take over the state management of the checkbox (or any input, for that matter). We do this because it gives us an easy way to know the state of an input at any time, since it'll be in our `state`.
 
 For this step, try to make the checkbox input you used a Controlled Component. In other words, declare some state for `ListItem` that determines whether the checkbox is checked or not, and that changes when the checkbox is pressed.
 
@@ -134,15 +134,10 @@ As a starting point, think about how you might represent a to-do item in `state`
 #### Hint
 We need someplace to keep track of all these to-dos, and we need to keep track of the user's input. Let's put that in `state`. But `state` for which component? Well, the parent component `TodoList` is responsible for passing down content as `props` to `TodoItem`, and it has our text input as well, so let's put it there.
 
-Your `TodoList` `constructor` should look something like this:
+Your `TodoList` should begin by initializing state for the todos array and inputText, like this:
 ```javascript
-constructor(props) {
-  super(props);
-  this.state = {
-    todos: [],
-    inputText: ""
-  };
-}
+const [todos, setTodos] = useState([]);
+const [inputText, setInputText] = useState("");
 ```
 We have an array for keeping track of our list of to-dos, and a string for tracking user input. Looks good!
 

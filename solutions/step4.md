@@ -1,63 +1,49 @@
 `TodoList.js`:
 ```html
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ListItem from "./ListItem.js";
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: [],
-      inputText: ""
-    };
-  }
+const TodoList = (props) => {
+  const [todos, setTodos] = useState([]);
+  const [inputText, setInputText] = useState("");
 
-  handleInputChange = (event) => {
+  const handleInputChange = (event) => {
     const value = event.target.value;
-    this.setState({
-      inputText: value
-    });
+    setInputText(value);
   };
 
-  submitTodo = () => {
-    const { todos, inputText } = this.state;
-    const newTodos = todos.concat([inputText]);
-    this.setState({
-      todos: newTodos,
-      inputText: ""
-    });
+  const submitTodo = () => {
+    setTodos([...todos, inputText]);
+    setInputText("");
   };
 
-  deleteTodo = (index) => {
-    const { todos } = this.state;
+  const deleteTodo = (index) => {
     // One way to copy an array:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
     const newTodos = todos.slice();
     newTodos.splice(index, 1)
-    this.setState({ todos: newTodos });
+    setTodos(newTodos);
   };
 
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.state.todos.map((todo, index) => (
-            <ListItem
-              key={`listItem-${index}`}
-              content={todo}
-              deleteTodo={() => this.deleteTodo(index)}
-            />
-          ))}
-        </ul>
-        <input
-          type="text"
-          value={this.state.inputText}
-          onChange={this.handleInputChange}
-        />
-        <button onClick={this.submitTodo}>Add to-do!</button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ul>
+        {todos.map((todo, index) => (
+          <ListItem
+            key={`listItem-${index}`}
+            content={todo}
+            deleteTodo={() => deleteTodo(index)}
+          />
+        ))}
+      </ul>
+      <input
+        type="text"
+        value={inputText}
+        onChange={handleInputChange}
+      />
+      <button onClick={submitTodo}>Add to-do!</button>
+    </div>
+  );
 }
 
 export default TodoList;
@@ -65,36 +51,27 @@ export default TodoList;
 
 `ListItem.js`:
 ```html
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class ListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDone: false
-    };
-  }
+const ListItem = (props) => {
+  const [isDone, setIsDone] = useState(false);
 
-  handleInputChange = event => {
+  const handleInputChange = event => {
     const value = event.target.checked;
-    this.setState({
-      isDone: value
-    });
+    setIsDone(value);
   };
 
-  render() {
-    return (
-      <li>
-        <input
-          type="checkbox"
-          checked={this.state.isGoing}
-          onChange={this.handleInputChange}
-        />
-        <span>{this.props.content}</span>
-        <button onClick={this.props.deleteTodo}>X</button>
-      </li>
-    );
-  }
+  return (
+    <li>
+      <input
+        type="checkbox"
+        checked={this.state.isGoing}
+        onChange={this.handleInputChange}
+      />
+      <span>{props.content}</span>
+      <button onClick={this.props.deleteTodo}>X</button>
+    </li>
+  );
 }
 
 export default ListItem;
