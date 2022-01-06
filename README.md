@@ -112,7 +112,7 @@ For this step, try to make the checkbox input you used a Controlled Component. I
 <br/>
 
 #### Solution
-[Step 2.5 solution](solutions/step25.md)
+[Step 2.5 solution](solutions/step2_5.md)
 
 ## Step 3: Make to-dos based on user input
 The first time we build a React component, it's always helpful to pass in some hardcoded `props`, so that we know the component works as expected. The natural next step is to get rid of the hardcoding, and use dynamic data. Let's try to do that with our to-do list, and make to-do items based on user input. 
