@@ -255,7 +255,7 @@ git checkout complete
 This will replace your code with our solution, which you can explore as much as you want. If you ever want to get back to your work, simply run
 
 ```
-git checkout master
+git checkout main
 ```
 
 That's all! If you have any questions, feel free to ask on [Piazza](https://piazza.com/class/lc27xbtdneliq).
